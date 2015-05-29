@@ -36,4 +36,16 @@ angular.module('starter.controllers', [])
     $scope.settings = {
       enableFriends: true
     };
-  });
+  })
+
+.directive('miDirectiva', function(){
+    return {
+      template: '<h1>{{attrs.titulo}}</h1>',
+      scope: {},
+      link: function(scope, elem, attrs){
+        scope.attrs = attrs;
+      }
+    };
+  })
+
+;
