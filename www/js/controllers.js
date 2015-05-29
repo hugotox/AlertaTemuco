@@ -19,6 +19,10 @@ angular.module('starter.controllers', [])
 
     $scope.mensaje = 'Hola <b>mundo</b>';
 
+    function redisenar(){
+      console.log('Acordarse de rediseñar esto');
+    }
+
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {
