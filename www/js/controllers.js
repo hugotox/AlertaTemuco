@@ -3,18 +3,26 @@ angular.module('starter.controllers', [])
   .controller('DashCtrl', function ($scope, $http) {
 
     $http({
-      url: 'http://seremi9.redsalud.gob.cl/?page_id=5037',
+      url: 'http://www.seremisalud9.cl/alerta_notifica/alerta.php',
       method: 'GET'
     })
       .success(function(response){
-        var tmp = document.implementation.createHTMLDocument();
-        tmp.body.innerHTML = response;
-        console.log(response);
-        var parentTable = tmp.body.getElementsByTagName('table')[0];
-        var table = parentTable.getElementsByTagName('table')[0];
-        var datos = table.getElementsByTagName('b');
-        console.log('Hoy: ' + datos[0].innerHTML);
-        console.log('Mañana: ' + datos[1].innerHTML);
+        var parser = new DOMParser(),
+            html = parser.parseFromString(response,'text/html'),
+            tInfo = html.getElementsByTagName('tbody')[1],
+            cAire = tInfo.getElementsByTagName('tr')[5].getElementsByTagName('strong'),
+            restriccion = tInfo.getElementsByTagName('tr')[6].getElementsByTagName('strong');
+
+        $scope.calidad = {'ayer': cAire[0].innerHTML.toLowerCase(),
+                          'hoy': cAire[1].innerHTML.toLowerCase(),
+                          'mañana': cAire[2].innerHTML.toLowerCase()};
+
+        $scope.restriccion = {'ayer': restriccion[0].innerHTML.toLowerCase(),
+                              'hoy': restriccion[1].innerHTML.toLowerCase(),
+                              'mañana': restriccion[2].innerHTML.toLowerCase()};
+
+        console.log({calidad: $scope.calidad,
+                     restriccion: $scope.restriccion});
       });
 
     $scope.mensaje = 'Hola <b>mundo</b>';
