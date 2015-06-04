@@ -1,14 +1,11 @@
-### Selector para la restriccion desde la pagina de seremi
+# App para monitorear la restricción de uso de leña en Temuco
 
-http://seremi9.redsalud.gob.cl/?page_id=5037
-
+## Link oficial de la página del Seremi
 ```
-// ayer
-$('#Layer1 table:first table:first tr:nth-child(3) td:first b').html()
+http://www.seremisalud9.cl/alerta_notifica/alerta.php
+```
 
-// hoy
-$('#Layer1 table:first table:first tr:nth-child(3) td:nth-child(2) b')
-
-// mañana
-$('#Layer1 table:first table:first tr:nth-child(3) td:nth-child(3) b')
+## Abrir Chrome en modo inseguro:
+```
+open -a Google\ Chrome --args --disable-web-security
 ```
